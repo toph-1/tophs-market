@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sab Market | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #111111;
+            --border-color: #222222;
+            --accent: #00ff88;
+            --accent-dark: #00cc6a;
+            --text: #e0e0e0;
+            --text-dim: #888888;
+            --danger: #ff5555;
+            --warning: #ffaa00;
+            --success: #00ff88;
+            --glow: 0 0 10px rgba(0, 255, 136, 0.3);
+            --glow-strong: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 20%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: var(--accent);
+            text-shadow: var(--glow-strong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .logo::after {
+            content: '_';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .tagline {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Login Container */
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Panel - Information */
+        .info-panel {
+            background: linear-gradient(135deg, #0a0a0a 0%, #001a0d 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            opacity: 0.1;
+        }
+
+        .info-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        .security-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        /* Right Panel - Login Form */
+        .form-panel {
+            padding: 3rem;
+            background: var(--card-bg);
+        }
+
+        .form-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .form-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .form-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .form-divider span {
+            background: var(--card-bg);
+            padding: 0 1rem;
+            position: relative;
+            color: var(--text-dim);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-dim);
+        }
+
+        .register-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: var(--glow);
+            display: none;
+            z-index: 1000;
+            max-width: 400px;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification.success {
+            border-color: var(--success);
+        }
+
+        .notification.error {
+            border-color: var(--danger);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+        }
+
+        .notification.success .notification-icon {
+            color: var(--success);
+        }
+
+        .notification.error .notification-icon {
+            color: var(--danger);
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-user-secret"></i>
+                SAB MARKET
+            </div>
+            <p class="tagline">Secure login to access a world of marketing</p>
+        </div>
+
+        <div class="login-container">
+            <!-- Information Panel -->
+            <div class="info-panel">
+                <h2 class="info-title">Secure Access Portal</h2>
+                <ul class="features-list">
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <strong>Military-Grade Encryption</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">All login data encrypted end-to-end</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-user-lock"></i>
+                        <div>
+                            <strong>No IP Logging</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">Your access remains anonymous</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Session Management</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">Auto-logout after 30 minutes</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Security Alerts</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">Immediate notification of suspicious activity</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="security-badge">
+                    <i class="fas fa-lock" style="color: var(--accent); font-size: 1.2rem; margin-right: 10px;"></i>
+                    <div>
+                        <strong>Secure Login Process</strong><br>
+                        Your credentials are encrypted locally before transmission
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="form-panel">
+                <h2 class="form-title">Login to Sab Market</h2>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" id="username" placeholder="Enter your username" required>
+                        <div class="error-message" id="username-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="password-container">
+                            <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" id="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+
+                    <div class="login-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember-me">
+                            Remember me
+                        </label>
+                        <a class="forgot-password" onclick="showForgotPassword()">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <div id="spinner" class="spinner"></div>
+
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Login to Sab Market
+                    </button>
+
+                    <div class="form-divider">
+                        <span>OR</span>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="loginAsGuest()">
+                        <i class="fas fa-user-secret"></i> Continue as Guest
+                    </button>
+                </form>
+
+                <div class="register-link">
+                    Don't have an account? <a href="register.html">Create one now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <button class="close-notification" onclick="hideNotification()">&times;</button>
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div>
+                <div id="notification-title">Notification</div>
+                <div id="notification-message">Message content</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: This hash function MUST match the one in register.html
+        function hashPassword(password) {
+            // Simple but consistent hash for demo purposes
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            // Add salt and convert to base64 for better storage
+            const salt = 'SAB_MARKET_SALT_2024';
+            const salted = password + salt;
+            let saltedHash = 0;
+            for (let i = 0; i < salted.length; i++) {
+                const char = salted.charCodeAt(i);
+                saltedHash = ((saltedHash << 5) - saltedHash) + char;
+                saltedHash = saltedHash & saltedHash;
+            }
+            return btoa(saltedHash.toString()).slice(0, 32);
+        }
+
+        // DOM Elements
+        const loginForm = document.getElementById('login-form');
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const spinner = document.getElementById('spinner');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Toggle password visibility
+        togglePasswordBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            
+            // Username validation
+            const username = document.getElementById('username').value.trim();
+            const usernameError = document.getElementById('username-error');
+            if (username.length < 1) {
+                showError(usernameError, 'Username is required');
+                isValid = false;
+            } else {
+                hideError(usernameError);
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('password-error');
+            if (password.length < 1) {
+                showError(passwordError, 'Password is required');
+                isValid = false;
+            } else {
+                hideError(passwordError);
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+
+            // Show loading spinner
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+
+            // Collect form data
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+
+            // Simulate API call delay
+            setTimeout(() => {
+                // Get stored users from localStorage
+                const users = JSON.parse(localStorage.getItem('sabMarketUsers') || '[]');
+                console.log('Stored users:', users); // Debug log
+                
+                // Hash the entered password for comparison
+                const enteredPasswordHash = hashPassword(password);
+                console.log('Entered hash:', enteredPasswordHash); // Debug log
+                
+                // Find user by username
+                const user = users.find(u => u.username === username);
+                console.log('Found user:', user); // Debug log
+                
+                if (user) {
+                    console.log('Stored hash:', user.passwordHash); // Debug log
+                    console.log('Match?', user.passwordHash === enteredPasswordHash); // Debug log
+                    
+                    // Compare password hashes
+                    if (user.passwordHash === enteredPasswordHash) {
+                        // Update last login timestamp
+                        user.lastLogin = new Date().toISOString();
+                        localStorage.setItem('sabMarketUsers', JSON.stringify(users));
+                        
+                        // Store login session
+                        const sessionData = {
+                            username: username,
+                            loggedIn: true,
+                            timestamp: new Date().toISOString(),
+                            sessionId: 'SAB-SESSION-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+                            trustScore: user.trustScore || 70,
+                            verificationLevel: user.verificationLevel || 'pending',
+                            accountId: user.accountId
+                        };
+                        
+                        localStorage.setItem('sabMarketCurrentSession', JSON.stringify(sessionData));
+                        
+                        if (rememberMe) {
+                            localStorage.setItem('sabMarketRememberMe', JSON.stringify({
+                                username: username,
+                                timestamp: new Date().toISOString()
+                            }));
+                        }
+                        
+                        // Hide spinner and reset button
+                        spinner.style.display = 'none';
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Sab Market';
+                        
+                        // Show success and redirect
+                        showNotification('success', 'Login Successful', 'Welcome to Sab Market!');
+                        
+                        // Redirect to marketplace after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = 'marketplace.html';
+                        }, 2000);
+                        
+                    } else {
+                        // Wrong password
+                        spinner.style.display = 'none';
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Sab Market';
+                        
+                        showNotification('error', 'Login Failed', 'Invalid password');
+                    }
+                    
+                } else {
+                    // User not found
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Sab Market';
+                    
+                    showNotification('error', 'Login Failed', 'Username not found');
+                }
+                
+            }, 1500);
+        });
+
+        // Login as guest
+        function loginAsGuest() {
+            showNotification('info', 'Guest Mode', 'Creating temporary guest session...');
+            
+            setTimeout(() => {
+                const guestSession = {
+                    username: 'Guest_' + Math.random().toString(36).substr(2, 8),
+                    loggedIn: true,
+                    isGuest: true,
+                    timestamp: new Date().toISOString(),
+                    sessionId: 'GUEST-' + Date.now(),
+                    trustScore: 50,
+                    verificationLevel: 'guest'
+                };
+                
+                localStorage.setItem('sabMarketCurrentSession', JSON.stringify(guestSession));
+                
+                showNotification('success', 'Guest Session Created', 'Redirecting to marketplace...');
+                
+                setTimeout(() => {
+                    window.location.href = 'marketplace.html';
+                }, 2000);
+            }, 1000);
+        }
+
+        // Forgot password
+        function showForgotPassword() {
+            const username = document.getElementById('username').value.trim();
+            
+            if (!username) {
+                showNotification('info', 'Recovery Required', 'Please enter your username first');
+                return;
+            }
+            
+            // Get stored users
+            const users = JSON.parse(localStorage.getItem('sabMarketUsers') || '[]');
+            const user = users.find(u => u.username === username);
+            
+            if (user) {
+                showNotification('info', 'Account Recovery', 
+                    'Use your security question to recover access. Question: ' + user.securityQuestion);
+            } else {
+                showNotification('error', 'Account Not Found', 'Username not found in our system');
+            }
+        }
+
+        // Notification functions
+        function showNotification(type, title, message) {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notification-title');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            notification.className = `notification ${type}`;
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            const icon = notification.querySelector('.notification-icon i');
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle';
+            } else if (type === 'info') {
+                icon.className = 'fas fa-info-circle';
+            } else {
+                icon.className = 'fas fa-info-circle';
+            }
+            
+            notification.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(hideNotification, 5000);
+        }
+
+        function hideNotification() {
+            document.getElementById('notification').style.display = 'none';
+        }
+
+        // Error handling functions
+        function showError(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function hideError(element) {
+            element.style.display = 'none';
+        }
+
+        // Check for remembered user and existing session
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize users storage if it doesn't exist
+            if (!localStorage.getItem('sabMarketUsers')) {
+                localStorage.setItem('sabMarketUsers', JSON.stringify([]));
+            }
+            
+            // Check for remembered username
+            const remembered = localStorage.getItem('sabMarketRememberMe');
+            if (remembered) {
+                try {
+                    const rememberData = JSON.parse(remembered);
+                    document.getElementById('username').value = rememberData.username;
+                    document.getElementById('remember-me').checked = true;
+                } catch (e) {
+                    console.log('No remembered user found');
+                }
+            }
+            
+            // Check if user is already logged in
+            const currentSession = localStorage.getItem('sabMarketCurrentSession');
+            if (currentSession) {
+                try {
+                    const session = JSON.parse(currentSession);
+                    if (session.loggedIn) {
+                        showNotification('info', 'Already Logged In', 'Redirecting to marketplace...');
+                        setTimeout(() => {
+                            window.location.href = 'marketplace.html';
+                        }, 1500);
+                    }
+                } catch (e) {
+                    // Invalid session, continue with login
+                }
+            }
+            
+            // Auto-focus username field
+            document.getElementById('username').focus();
+            
+            // Debug: Show stored users
+            console.log('Available users:', JSON.parse(localStorage.getItem('sabMarketUsers') || '[]'));
+        });
+    </script>
+</body>
+</html>

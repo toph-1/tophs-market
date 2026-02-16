@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sab Market | Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #111111;
+            --border-color: #222222;
+            --accent: #00ff88;
+            --accent-dark: #00cc6a;
+            --text: #e0e0e0;
+            --text-dim: #888888;
+            --danger: #ff5555;
+            --warning: #ffaa00;
+            --success: #00ff88;
+            --glow: 0 0 10px rgba(0, 255, 136, 0.3);
+            --glow-strong: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 20%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: var(--accent);
+            text-shadow: var(--glow-strong);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .logo::after {
+            content: '_';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .tagline {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Registration Container */
+        .registration-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Left Panel - Information */
+        .info-panel {
+            background: linear-gradient(135deg, #0a0a0a 0%, #001a0d 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--accent);
+        }
+
+        .security-badge {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Right Panel - Registration Form */
+        .form-panel {
+            padding: 3rem;
+            background: var(--card-bg);
+        }
+
+        .form-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--danger);
+            transition: all 0.3s;
+        }
+
+        .strength-fill.good {
+            background: var(--warning);
+        }
+
+        .strength-fill.strong {
+            background: var(--success);
+        }
+
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 3px;
+        }
+
+        .terms-link {
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark-bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            box-shadow: var(--glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .form-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .form-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .form-divider span {
+            background: var(--card-bg);
+            padding: 0 1rem;
+            position: relative;
+            color: var(--text-dim);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-dim);
+        }
+
+        .login-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: var(--glow);
+            display: none;
+            z-index: 1000;
+            max-width: 400px;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification.success {
+            border-color: var(--success);
+        }
+
+        .notification.error {
+            border-color: var(--danger);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+        }
+
+        .notification.success .notification-icon {
+            color: var(--success);
+        }
+
+        .notification.error .notification-icon {
+            color: var(--danger);
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--darker-bg);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-user-secret"></i>
+                SAB MARKET
+            </div>
+            <p class="tagline">Create your secure account to access the world's most exclusive marketplace for confidential information</p>
+        </div>
+
+        <div class="registration-container">
+            <!-- Information Panel -->
+            <div class="info-panel">
+                <h2 class="info-title">Why Join Sab Market?</h2>
+                <ul class="features-list">
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <strong>Military-Grade Encryption</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">All data encrypted end-to-end</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-user-lock"></i>
+                        <div>
+                            <strong>Anonymous Identity</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">No personal information required</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-coins"></i>
+                        <div>
+                            <strong>Cryptocurrency Only</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">BTC, XMR, and other privacy coins</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-gem"></i>
+                        <div>
+                            <strong>Exclusive Access</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">Verified members only marketplace</div>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <strong>Escrow Protection</strong>
+                            <div style="font-size: 0.9rem; color: var(--text-dim);">Secure transactions guaranteed</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="security-badge">
+                    <i class="fas fa-lock" style="color: var(--accent); font-size: 1.2rem; margin-right: 10px;"></i>
+                    <div>
+                        <strong>Secure Registration Process</strong><br>
+                        Your data is encrypted locally before transmission
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="form-panel">
+                <h2 class="form-title">Create Account</h2>
+                
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label class="form-label">Username *</label>
+                        <input type="text" class="form-input" id="username" placeholder="Choose a unique username" required>
+                        <div class="form-hint">3-20 characters, letters, numbers, and underscores only</div>
+                        <div class="error-message" id="username-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Password *</label>
+                        <div class="password-container">
+                            <input type="password" class="form-input" id="password" placeholder="Minimum 8 characters" required>
+                            <button type="button" class="toggle-password" id="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div>Strength: <span id="strength-text">Weak</span></div>
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                        </div>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password *</label>
+                        <div class="password-container">
+                            <input type="password" class="form-input" id="confirm-password" placeholder="Re-enter your password" required>
+                            <button type="button" class="toggle-password" id="toggle-confirm-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="confirm-password-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Security Question *</label>
+                        <select class="form-input" id="security-question" required>
+                            <option value="">Select a security question</option>
+                            <option value="pet">What was your first pet's name?</option>
+                            <option value="city">In what city were you born?</option>
+                            <option value="school">What was the name of your first school?</option>
+                            <option value="mother">What is your mother's maiden name?</option>
+                            <option value="vacation">Where did you go on your first vacation?</option>
+                        </select>
+                        <div class="form-hint">For account recovery purposes</div>
+                        <div class="error-message" id="security-question-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Security Answer *</label>
+                        <input type="text" class="form-input" id="security-answer" placeholder="Your answer" required>
+                        <div class="error-message" id="security-answer-error"></div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agree-tos" required>
+                        <label for="agree-tos" style="font-size: 0.9rem;">
+                            I agree to the <a href="#" class="terms-link" onclick="showTerms()">Terms of Service</a> and 
+                            <a href="#" class="terms-link" onclick="showPrivacy()">Privacy Policy</a>. I understand that Sab Market is for legal information exchange only.
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter" style="font-size: 0.9rem;">
+                            Subscribe to encrypted newsletter for market updates (optional)
+                        </label>
+                    </div>
+
+                    <div id="spinner" class="spinner"></div>
+
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                        <i class="fas fa-user-plus"></i> Create Secure Account
+                    </button>
+
+                    <div class="form-divider">
+                        <span>OR</span>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="generateRandomCredentials()">
+                        <i class="fas fa-random"></i> Generate Random Credentials
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    Already have an account? <a href="index.html">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <button class="close-notification" onclick="hideNotification()">&times;</button>
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div>
+                <div id="notification-title">Notification</div>
+                <div id="notification-message">Message content</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: var(--success);">Account Created Successfully!</h3>
+                <button class="close-modal" onclick="hideModal('success-modal')">&times;</button>
+            </div>
+            <div style="text-align: center; padding: 2rem 0;">
+                <div style="font-size: 5rem; color: var(--success); margin-bottom: 1rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4 style="color: var(--accent); margin-bottom: 1rem;">Welcome to Sab Market</h4>
+                <p style="color: var(--text-dim); margin-bottom: 2rem;">
+                    Your account has been created securely. You can now login with your credentials.
+                </p>
+                
+                <div style="background: var(--darker-bg); border: 1px solid var(--accent); border-radius: 5px; padding: 1rem; margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--accent); margin-bottom: 0.5rem;">Account Created:</h5>
+                    <p><strong>Username:</strong> <span id="created-username"></span></p>
+                    <p><strong>Status:</strong> <span style="color: var(--accent);">Ready for Login</span></p>
+                </div>
+                
+                <button class="btn btn-primary" onclick="goToLogin()" style="width: 100%; margin-bottom: 1rem;">
+                    <i class="fas fa-sign-in-alt"></i> Go to Login Page
+                </button>
+                
+                <button class="btn btn-secondary" onclick="autoLogin()">
+                    <i class="fas fa-bolt"></i> Auto-Login Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Better hash function for password storage
+        function hashPassword(password) {
+            // Simple but consistent hash for demo purposes
+            // In production, use a proper hashing library like bcrypt
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            // Add salt and convert to base64 for better storage
+            const salt = 'SAB_MARKET_SALT_2024';
+            const salted = password + salt;
+            let saltedHash = 0;
+            for (let i = 0; i < salted.length; i++) {
+                const char = salted.charCodeAt(i);
+                saltedHash = ((saltedHash << 5) - saltedHash) + char;
+                saltedHash = saltedHash & saltedHash;
+            }
+            return btoa(saltedHash.toString()).slice(0, 32);
+        }
+
+        // DOM Elements
+        const registrationForm = document.getElementById('registration-form');
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const toggleConfirmPasswordBtn = document.getElementById('toggle-confirm-password');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const spinner = document.getElementById('spinner');
+        const submitBtn = document.getElementById('submit-btn');
+        const strengthFill = document.getElementById('strength-fill');
+        const strengthText = document.getElementById('strength-text');
+
+        // FIXED: Toggle password visibility for main password field
+        togglePasswordBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = this.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // FIXED: Toggle password visibility for confirm password field
+        toggleConfirmPasswordBtn.addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            const icon = this.querySelector('i');
+            icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Password strength checker
+        passwordInput.addEventListener('input', function(e) {
+            const password = e.target.value;
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 25;
+            if (password.length >= 12) strength += 15;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 20;
+            if (/[a-z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 20;
+            
+            // Update UI
+            strengthFill.style.width = Math.min(strength, 100) + '%';
+            
+            if (strength < 40) {
+                strengthFill.className = 'strength-fill';
+                strengthText.textContent = 'Weak';
+                strengthText.style.color = 'var(--danger)';
+            } else if (strength < 70) {
+                strengthFill.className = 'strength-fill good';
+                strengthText.textContent = 'Good';
+                strengthText.style.color = 'var(--warning)';
+            } else {
+                strengthFill.className = 'strength-fill strong';
+                strengthText.textContent = 'Strong';
+                strengthText.style.color = 'var(--success)';
+            }
+        });
+
+        // Form validation
+        function validateForm() {
+            let isValid = true;
+            
+            // Username validation
+            const username = document.getElementById('username').value.trim();
+            const usernameError = document.getElementById('username-error');
+            if (username.length < 3 || username.length > 20) {
+                showError(usernameError, 'Username must be between 3-20 characters');
+                isValid = false;
+            } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                showError(usernameError, 'Only letters, numbers, and underscores allowed');
+                isValid = false;
+            } else {
+                hideError(usernameError);
+            }
+
+            // Password validation
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('password-error');
+            if (password.length < 8) {
+                showError(passwordError, 'Password must be at least 8 characters long');
+                isValid = false;
+            } else {
+                hideError(passwordError);
+            }
+
+            // Confirm password validation
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const confirmError = document.getElementById('confirm-password-error');
+            if (password !== confirmPassword) {
+                showError(confirmError, 'Passwords do not match');
+                isValid = false;
+            } else {
+                hideError(confirmError);
+            }
+
+            // Security question validation
+            const securityQuestion = document.getElementById('security-question').value;
+            const securityQuestionError = document.getElementById('security-question-error');
+            if (!securityQuestion) {
+                showError(securityQuestionError, 'Please select a security question');
+                isValid = false;
+            } else {
+                hideError(securityQuestionError);
+            }
+
+            // Security answer validation
+            const securityAnswer = document.getElementById('security-answer').value.trim();
+            const securityAnswerError = document.getElementById('security-answer-error');
+            if (securityAnswer.length < 2) {
+                showError(securityAnswerError, 'Please provide a security answer');
+                isValid = false;
+            } else {
+                hideError(securityAnswerError);
+            }
+
+            // Terms agreement validation
+            const agreeTos = document.getElementById('agree-tos').checked;
+            if (!agreeTos) {
+                showNotification('error', 'Terms Required', 'You must agree to the Terms of Service');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        registrationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+
+            // Show loading spinner
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+
+            // Collect form data
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const securityQuestion = document.getElementById('security-question').value;
+            const securityAnswer = document.getElementById('security-answer').value.trim();
+            const newsletter = document.getElementById('newsletter').checked;
+            
+            // Hash the password and security answer
+            const passwordHash = hashPassword(password);
+            const securityAnswerHash = hashPassword(securityAnswer);
+            
+            // Create user object
+            const userData = {
+                username: username,
+                passwordHash: passwordHash, // Store hashed password
+                securityQuestion: securityQuestion,
+                securityAnswerHash: securityAnswerHash, // Store hashed security answer
+                newsletter: newsletter,
+                createdAt: new Date().toISOString(),
+                accountId: 'SAB-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase(),
+                trustScore: 70,
+                verificationLevel: 'pending',
+                lastLogin: null
+            };
+
+            // Save to localStorage
+            setTimeout(() => {
+                // Get existing users or create new array
+                const users = JSON.parse(localStorage.getItem('sabMarketUsers') || '[]');
+                
+                // Check if username already exists
+                if (users.some(user => user.username === username)) {
+                    showNotification('error', 'Username Taken', 'This username is already registered');
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Secure Account';
+                    return;
+                }
+
+                // Add new user
+                users.push(userData);
+                localStorage.setItem('sabMarketUsers', JSON.stringify(users));
+                
+                console.log('User saved:', userData); // Debug log
+                console.log('All users:', users); // Debug log
+                
+                // Hide spinner
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Secure Account';
+                
+                // Show success modal
+                document.getElementById('created-username').textContent = username;
+                showModal('success-modal');
+                
+                // Store plain password temporarily for auto-login option
+                sessionStorage.setItem('tempPassword', password);
+                sessionStorage.setItem('tempUsername', username);
+                
+            }, 1500);
+        });
+
+        // Generate random credentials
+        function generateRandomCredentials() {
+            const adjectives = ['Shadow', 'Crypto', 'Dark', 'Silent', 'Ghost', 'Stealth', 'Phantom', 'Night', 'Black', 'Hidden'];
+            const nouns = ['Hunter', 'Trader', 'Whisper', 'Oracle', 'Agent', 'Mask', 'Rider', 'Walker', 'Seeker', 'Guard'];
+            const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            const randomNumber = Math.floor(Math.random() * 1000);
+            const username = randomAdj + randomNoun + randomNumber;
+            
+            // Generate strong password
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let password = '';
+            for (let i = 0; i < 16; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            // Fill the form
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            document.getElementById('confirm-password').value = password;
+            
+            // Select a random security question
+            const questions = document.getElementById('security-question').options;
+            const randomQuestionIndex = Math.floor(Math.random() * (questions.length - 1)) + 1;
+            document.getElementById('security-question').selectedIndex = randomQuestionIndex;
+            
+            // Fill security answer
+            const answers = ['Fluffy', 'New York', 'Lincoln Elementary', 'Smith', 'Hawaii'];
+            document.getElementById('security-answer').value = answers[randomQuestionIndex - 1];
+            
+            // Trigger password strength update
+            const event = new Event('input');
+            passwordInput.dispatchEvent(event);
+            
+            showNotification('success', 'Credentials Generated', 'Random username and password have been generated');
+        }
+
+        // Auto-login after registration
+        function autoLogin() {
+            const username = sessionStorage.getItem('tempUsername');
+            const password = sessionStorage.getItem('tempPassword');
+            
+            if (!username || !password) {
+                showNotification('error', 'Auto-Login Failed', 'Please try manual login');
+                return;
+            }
+            
+            // Hash the password
+            const passwordHash = hashPassword(password);
+            
+            // Create session
+            const sessionData = {
+                username: username,
+                loggedIn: true,
+                timestamp: new Date().toISOString(),
+                sessionId: 'SAB-SESSION-' + Date.now(),
+                trustScore: 70,
+                verificationLevel: 'pending',
+                passwordHash: passwordHash // Store hash for verification
+            };
+            
+            localStorage.setItem('sabMarketCurrentSession', JSON.stringify(sessionData));
+            
+            // Clear temp data
+            sessionStorage.removeItem('tempUsername');
+            sessionStorage.removeItem('tempPassword');
+            
+            hideModal('success-modal');
+            showNotification('success', 'Auto-Login Successful', 'Redirecting to marketplace...');
+            
+            // Redirect to marketplace
+            setTimeout(() => {
+                window.location.href = 'marketplace.html';
+            }, 2000);
+        }
+
+        // Go to login page
+        function goToLogin() {
+            hideModal('success-modal');
+            showNotification('info', 'Redirecting', 'Taking you to the login page...');
+            
+            // Clear temp data
+            sessionStorage.removeItem('tempUsername');
+            sessionStorage.removeItem('tempPassword');
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        // Modal functions
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function hideModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showTerms() {
+            showNotification('info', 'Terms of Service', 'All transactions must comply with applicable laws. No illegal activities allowed.');
+        }
+
+        function showPrivacy() {
+            showNotification('info', 'Privacy Policy', 'Your data is encrypted and we do not share information with third parties.');
+        }
+
+        // Notification functions
+        function showNotification(type, title, message) {
+            const notification = document.getElementById('notification');
+            const notificationTitle = document.getElementById('notification-title');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            notification.className = `notification ${type}`;
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            const icon = notification.querySelector('.notification-icon i');
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle';
+            } else {
+                icon.className = 'fas fa-info-circle';
+            }
+            
+            notification.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(hideNotification, 5000);
+        }
+
+        function hideNotification() {
+            document.getElementById('notification').style.display = 'none';
+        }
+
+        // Error handling functions
+        function showError(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function hideError(element) {
+            element.style.display = 'none';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize users storage if it doesn't exist
+            if (!localStorage.getItem('sabMarketUsers')) {
+                localStorage.setItem('sabMarketUsers', JSON.stringify([]));
+            }
+            
+            // Auto-focus username field
+            document.getElementById('username').focus();
+            
+            // Debug: Check existing users
+            console.log('Existing users:', JSON.parse(localStorage.getItem('sabMarketUsers') || '[]'));
+        });
+    </script>
+</body>
+</html>
